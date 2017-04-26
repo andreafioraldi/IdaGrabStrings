@@ -6,15 +6,38 @@ __email__ = "andreafioraldi@gmail.com"
 import idaapi
 import subprocess
 import idc
+import os
+
+pwd = os.path.dirname(__file__)
 
 def startView(buf):
-    pass
+    view = subprocess.Popen(
+        [os.path.join(pwd, "IdaGrabStringsView.exe"), "1", buf],
+        stdout=subprocess.PIPE,
+        stdin=subprocess.PIPE
+        )
+
+def startViewGetPosition():
+    pos = idc.ScreenEA()
+    view = subprocess.Popen(
+        [os.path.join(pwd, "IdaGrabStringsView.exe"), "0", "0x"+hex(pos)],
+        stdout=subprocess.PIPE,
+        stdin=subprocess.PIPE
+        )
+    output = view.communicate()[0]
+    lines = output.split("\n")
+    return (int(lines[0]), int(lines[1]))
 
 def fromPosition():
-    pass
+    pos, length = startViewGetPosition()
+    buf = idc.GetManyBytes(pos, length, False)
+    startView(buf)
 
 def fromSelection():
-    pass
+    sel = idaapi.read_selection()
+    buf = idc.GetManyBytes(sel[1], sel[2] - sel[1], False)
+    startView(buf)
+                            
 
 MENU_PATH = 'Edit/Other'
 class IdaGrabStringsPlugin(idaapi.plugin_t):
@@ -23,7 +46,8 @@ class IdaGrabStringsPlugin(idaapi.plugin_t):
 
     help = "IdaGrabStrings: Grab strings from a bytes buffer in IDA"
     wanted_name = "IDA Grab Strings"
-
+    wanted_hotkey = "Alt-8"
+    
     def init(self):
         r = idaapi.add_menu_item(MENU_PATH, 'IdaGrabStrings - From position', '', 1, fromPosition, tuple())
         if r is None:
