@@ -7,15 +7,18 @@ import idaapi
 import subprocess
 import idc
 import os
+import threading
 
 pwd = os.path.dirname(__file__)
 
 def startView(buf):
     view = subprocess.Popen(
-        [os.path.join(pwd, "IdaGrabStringsView.exe"), "1", buf],
+        [os.path.join(pwd, "IdaGrabStringsView.exe"), "1"],
         stdout=subprocess.PIPE,
-        stdin=subprocess.PIPE
+        stdin=subprocess.PIPE,
+        shell=True
         )
+    view.communicate(input=buf)
 
 def startViewGetPosition():
     pos = idc.ScreenEA()
@@ -31,13 +34,17 @@ def startViewGetPosition():
 def fromPosition():
     pos, length = startViewGetPosition()
     buf = idc.GetManyBytes(pos, length, False)
-    startView(buf)
+    thread = threading.Thread(target=startView, args=(buf, ))
+    thread.deamon = True
+    thread.start()
 
 def fromSelection():
     sel = idaapi.read_selection()
     buf = idc.GetManyBytes(sel[1], sel[2] - sel[1], False)
-    startView(buf)
-                            
+    thread = threading.Thread(target=startView, args=(buf, ))
+    thread.deamon = True
+    thread.start()
+          
 
 MENU_PATH = 'Edit/Other'
 class IdaGrabStringsPlugin(idaapi.plugin_t):
