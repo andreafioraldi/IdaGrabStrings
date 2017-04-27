@@ -13,7 +13,7 @@ pwd = os.path.dirname(__file__)
 
 def startView(buf):
     view = subprocess.Popen(
-        [os.path.join(pwd, "IdaGrabStringsView.exe"), "1"],
+        [os.path.join(pwd, "IdaGrabStringsView.exe")],
         stdout=subprocess.PIPE,
         stdin=subprocess.PIPE,
         shell=True
@@ -23,7 +23,7 @@ def startView(buf):
 def startViewGetPosition():
     pos = idc.ScreenEA()
     view = subprocess.Popen(
-        [os.path.join(pwd, "IdaGrabStringsView.exe"), "0", "0x"+hex(pos)],
+        [os.path.join(pwd, "IdaGrabStringsView.exe"), "0x"+hex(pos)],
         stdout=subprocess.PIPE,
         stdin=subprocess.PIPE
         )
@@ -31,10 +31,14 @@ def startViewGetPosition():
     lines = output.split("\n")
     return (int(lines[0]), int(lines[1]))
 
-def fromPosition():
+def fromPositionThread():
     pos, length = startViewGetPosition()
+    idaapi.msg("IdaGrabStrings: getted position = "+hex(pos)+" "+str(length)+"\n")
     buf = idc.GetManyBytes(pos, length, False)
-    thread = threading.Thread(target=startView, args=(buf, ))
+    startView(buf)
+
+def fromPosition():
+    thread = threading.Thread(target=fromPositionThread, args=tuple())
     thread.deamon = True
     thread.start()
 
