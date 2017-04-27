@@ -64,6 +64,9 @@
     <EmbeddedResource Include="GetPosForm.resx">
       <DependentUpon>GetPosForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GrabStringsForm.resx">
+      <DependentUpon>GrabStringsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
