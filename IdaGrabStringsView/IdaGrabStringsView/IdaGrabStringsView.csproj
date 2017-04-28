@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenStructForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenStructForm.Designer.cs">
+      <DependentUpon>GenStructForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GetPosForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GenStructForm.resx">
+      <DependentUpon>GenStructForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GetPosForm.resx">
       <DependentUpon>GetPosForm.cs</DependentUpon>
     </EmbeddedResource>

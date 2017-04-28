@@ -37,6 +37,7 @@
             this.alphanumAsciiBox = new System.Windows.Forms.RadioButton();
             this.strMinimumBox = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.genStructBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.strMinimumBox)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,6 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -65,7 +65,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 57);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(432, 244);
+            this.dataGridView1.RowHeadersWidth = 50;
+            this.dataGridView1.Size = new System.Drawing.Size(499, 317);
             this.dataGridView1.TabIndex = 1;
             // 
             // offsetColumn
@@ -138,11 +139,22 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Strings min length:";
             // 
+            // genStructBtn
+            // 
+            this.genStructBtn.Location = new System.Drawing.Point(300, 0);
+            this.genStructBtn.Name = "genStructBtn";
+            this.genStructBtn.Size = new System.Drawing.Size(121, 23);
+            this.genStructBtn.TabIndex = 7;
+            this.genStructBtn.Text = "Generate C struct";
+            this.genStructBtn.UseVisualStyleBackColor = true;
+            this.genStructBtn.Click += new System.EventHandler(this.genStructBtn_Click);
+            // 
             // GrabStringsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 301);
+            this.ClientSize = new System.Drawing.Size(500, 374);
+            this.Controls.Add(this.genStructBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.strMinimumBox);
             this.Controls.Add(this.alphanumAsciiBox);
@@ -150,6 +162,7 @@
             this.Controls.Add(this.asciiBox);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.grabStringsBtn);
+            this.MinimumSize = new System.Drawing.Size(437, 339);
             this.Name = "GrabStringsForm";
             this.Text = "GrabStringsForm";
             this.Load += new System.EventHandler(this.GrabStringsForm_Load);
@@ -171,5 +184,6 @@
         private System.Windows.Forms.RadioButton alphanumAsciiBox;
         private System.Windows.Forms.NumericUpDown strMinimumBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button genStructBtn;
     }
 }

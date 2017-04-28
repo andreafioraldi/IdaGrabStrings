@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IdaGrabStringsView
@@ -78,10 +72,62 @@ namespace IdaGrabStringsView
             
             for (int i = 0; i < strings_list.Count; ++i)
             {
-                dataGridView1.Rows.Add(Convert.ToString(strings_indexes[i], 16), strings_list[i].ToString());
+                dataGridView1.Rows.Add(strings_indexes[i], strings_list[i].ToString());
             }
         }
 
+        private string ToDeclaration(string str, HashSet<string> fields)
+        {
+            string decl = "";
+            int len = str.Length < 16 ? str.Length : 16;
+            for (int i = 0; i < len; ++i)
+            {
+                if (printables_alnumASCII[str[i]])
+                    decl += str[i];
+                else decl += "_";
+            }
+            if (decl[0] >= '0' && decl[0] <= '9')
+                decl = "N" + decl;
+            if (fields.Contains(decl))
+            {
+                string nid = decl + "_1";
+                int i = 1;
+                while (fields.Contains(nid))
+                    nid = decl + "_" + (++i);
+                decl = nid;
+            }
+            fields.Add(decl);
+            decl += ";";
+            while (decl.Length < 18)
+                decl += " ";
+            return "char " + decl;
+        }
 
+        private void genStructBtn_Click(object sender, EventArgs e)
+        {
+            HashSet<string> fields = new HashSet<string>();
+            string code = "struct MY_IDA_STRUCT {" + Environment.NewLine;
+            long last_idx = -1;
+
+            for(int i = 0; i < dataGridView1.Rows.Count; ++i)
+            {
+                long idx = (long)dataGridView1.Rows[i].Cells[0].Value;
+                if (last_idx +1 != idx)
+                {
+                    code += "            char _padding[" + (idx - last_idx -1) + "];" + Environment.NewLine;
+                }
+
+                string off = "/* " + idx + " */";
+                while (off.Length < 12)
+                    off += " ";
+                code += off;
+                code += ToDeclaration((string)dataGridView1.Rows[i].Cells[1].Value, fields);
+                code += " // " + (string)dataGridView1.Rows[i].Cells[1].Value + "\n" + Environment.NewLine;
+
+                last_idx = idx;
+            }
+            code += "};";
+            new GenStructForm(code).Show();
+        }
     }
 }
