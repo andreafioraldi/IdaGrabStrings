@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,21 @@ namespace IdaGrabStringsView
         private void GenStructForm_Load(object sender, EventArgs e)
         {
             codeBox.Text = code;
+        }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    File.WriteAllText(saveFileDialog1.FileName, codeBox.Text);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(this, ex.Message, "Save file error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

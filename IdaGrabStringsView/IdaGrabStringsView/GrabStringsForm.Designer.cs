@@ -38,6 +38,7 @@
             this.strMinimumBox = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.genStructBtn = new System.Windows.Forms.Button();
+            this.notNulBox = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.strMinimumBox)).BeginInit();
             this.SuspendLayout();
@@ -149,11 +150,22 @@
             this.genStructBtn.UseVisualStyleBackColor = true;
             this.genStructBtn.Click += new System.EventHandler(this.genStructBtn_Click);
             // 
+            // notNulBox
+            // 
+            this.notNulBox.AutoSize = true;
+            this.notNulBox.Location = new System.Drawing.Point(275, 34);
+            this.notNulBox.Name = "notNulBox";
+            this.notNulBox.Size = new System.Drawing.Size(65, 17);
+            this.notNulBox.TabIndex = 8;
+            this.notNulBox.Text = "not NUL";
+            this.notNulBox.UseVisualStyleBackColor = true;
+            // 
             // GrabStringsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 374);
+            this.Controls.Add(this.notNulBox);
             this.Controls.Add(this.genStructBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.strMinimumBox);
@@ -164,7 +176,8 @@
             this.Controls.Add(this.grabStringsBtn);
             this.MinimumSize = new System.Drawing.Size(437, 339);
             this.Name = "GrabStringsForm";
-            this.Text = "GrabStringsForm";
+            this.ShowIcon = false;
+            this.Text = "IdaGrabStrings";
             this.Load += new System.EventHandler(this.GrabStringsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.strMinimumBox)).EndInit();
@@ -185,5 +198,6 @@
         private System.Windows.Forms.NumericUpDown strMinimumBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button genStructBtn;
+        private System.Windows.Forms.RadioButton notNulBox;
     }
 }
