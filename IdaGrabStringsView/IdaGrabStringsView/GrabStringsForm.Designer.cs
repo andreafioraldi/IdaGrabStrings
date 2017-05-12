@@ -39,13 +39,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.genStructBtn = new System.Windows.Forms.Button();
             this.notNulBox = new System.Windows.Forms.RadioButton();
+            this.saveBtn = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.strMinimumBox)).BeginInit();
             this.SuspendLayout();
             // 
             // grabStringsBtn
             // 
-            this.grabStringsBtn.Location = new System.Drawing.Point(0, 0);
+            this.grabStringsBtn.Location = new System.Drawing.Point(92, 1);
             this.grabStringsBtn.Name = "grabStringsBtn";
             this.grabStringsBtn.Size = new System.Drawing.Size(75, 23);
             this.grabStringsBtn.TabIndex = 0;
@@ -116,7 +118,7 @@
             // 
             // strMinimumBox
             // 
-            this.strMinimumBox.Location = new System.Drawing.Point(195, 3);
+            this.strMinimumBox.Location = new System.Drawing.Point(275, 4);
             this.strMinimumBox.Minimum = new decimal(new int[] {
             1,
             0,
@@ -134,7 +136,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(96, 5);
+            this.label1.Location = new System.Drawing.Point(176, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 6;
@@ -142,7 +144,7 @@
             // 
             // genStructBtn
             // 
-            this.genStructBtn.Location = new System.Drawing.Point(300, 0);
+            this.genStructBtn.Location = new System.Drawing.Point(346, 31);
             this.genStructBtn.Name = "genStructBtn";
             this.genStructBtn.Size = new System.Drawing.Size(121, 23);
             this.genStructBtn.TabIndex = 7;
@@ -160,11 +162,22 @@
             this.notNulBox.Text = "not NUL";
             this.notNulBox.UseVisualStyleBackColor = true;
             // 
+            // saveBtn
+            // 
+            this.saveBtn.Location = new System.Drawing.Point(2, 1);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(86, 23);
+            this.saveBtn.TabIndex = 9;
+            this.saveBtn.Text = "Save buffer";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            // 
             // GrabStringsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 374);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.notNulBox);
             this.Controls.Add(this.genStructBtn);
             this.Controls.Add(this.label1);
@@ -178,7 +191,6 @@
             this.Name = "GrabStringsForm";
             this.ShowIcon = false;
             this.Text = "IdaGrabStrings";
-            this.Load += new System.EventHandler(this.GrabStringsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.strMinimumBox)).EndInit();
             this.ResumeLayout(false);
@@ -199,5 +211,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button genStructBtn;
         private System.Windows.Forms.RadioButton notNulBox;
+        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

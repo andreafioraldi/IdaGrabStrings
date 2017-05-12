@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace IdaGrabStringsView
@@ -46,7 +45,7 @@ namespace IdaGrabStringsView
                         buf[j++] = bytes_list[i][k];
                     }
                 }
-                
+                Console.Write(0);
                 Application.Run(new GrabStringsForm(buf));
             }
         }
